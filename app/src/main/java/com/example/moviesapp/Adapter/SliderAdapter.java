@@ -1,7 +1,5 @@
 package com.example.moviesapp.Adapter;
 import android.content.Context;
-import android.media.Image;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +24,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     private ViewPager2 viewPager2;
     private Context context;
 
-    public SliderAdapter(List<com.example.moviesapp.Domain.SliderItem> sliderItem, ViewPager2 viewPager2, Context context) {
+    public SliderAdapter(List<com.example.moviesapp.Domain.SliderItem> sliderItem, ViewPager2 viewPager2) {
         SliderItem = sliderItem;
         this.viewPager2 = viewPager2;
         this.context = context;
@@ -43,12 +41,16 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     @Override
     public void onBindViewHolder(@NonNull SliderAdapter.SliderViewHolder holder, int position) {
-
+        holder.setImageView(SliderItem.get(position));
+        if(position==SliderItem.size()-2)
+        {
+            viewPager2.post(runnable);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return SliderItem.size();
     }
 
     public class SliderViewHolder extends RecyclerView.ViewHolder{
@@ -72,5 +74,5 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
             SliderItem.addAll(SliderItem);
             notifyDataSetChanged();
         }
-    }
+    };
 }
