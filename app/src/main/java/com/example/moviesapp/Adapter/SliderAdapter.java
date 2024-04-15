@@ -20,14 +20,13 @@ import java.util.List;
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder>
 {
-    private List<SliderItem> SliderItem;
+    private List<SliderItem> sliderItems;
     private ViewPager2 viewPager2;
     private Context context;
 
-    public SliderAdapter(List<com.example.moviesapp.Domain.SliderItem> sliderItem, ViewPager2 viewPager2) {
-        SliderItem = sliderItem;
+    public SliderAdapter(List<SliderItem> sliderItem, ViewPager2 viewPager2) {
+        this.sliderItems= sliderItem;
         this.viewPager2 = viewPager2;
-        this.context = context;
     }
 
     @NonNull
@@ -41,37 +40,40 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     @Override
     public void onBindViewHolder(@NonNull SliderAdapter.SliderViewHolder holder, int position) {
-        holder.setImageView(SliderItem.get(position));
-        if(position==SliderItem.size()-2)
+       holder.setImageView1(sliderItems.get(position));
+        if(position==sliderItems.size()-2)
         {
             viewPager2.post(runnable);
         }
     }
 
+
     @Override
     public int getItemCount() {
-        return SliderItem.size();
+        return sliderItems.size();
     }
 
     public class SliderViewHolder extends RecyclerView.ViewHolder{
-        private ImageView imageView;
+        private ImageView imageView1;
         public SliderViewHolder(@NonNull View imageView) {
             super(imageView);
-            imageView=imageView.findViewById(R.id.SliderItem);
+            imageView1=imageView.findViewById(R.id.imageSlider);
         }
-        void setImageView(SliderItem sliderItem){
+        void setImageView1(SliderItem sliderItem)
+        {
             RequestOptions requestOptions=new RequestOptions();
             requestOptions=requestOptions.transform(new CenterCrop(),new RoundedCorners(60));
+
             Glide.with(context)
                     .load(sliderItem.getImage())
                     .apply(requestOptions)
-                    .into(imageView);
+                    .into(imageView1);
         }
     }
     private Runnable runnable=new Runnable() {
         @Override
         public void run() {
-            SliderItem.addAll(SliderItem);
+            sliderItems.addAll(sliderItems);
             notifyDataSetChanged();
         }
     };

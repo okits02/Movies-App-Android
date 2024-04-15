@@ -6,10 +6,9 @@ plugins {
 android {
     namespace = "com.example.moviesapp"
     compileSdk = 34
-
     defaultConfig {
         applicationId = "com.example.moviesapp"
-        minSdk = 31
+        minSdk = 25
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -74,4 +73,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.code.gson:gson 2.9.1")
 }

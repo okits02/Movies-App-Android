@@ -2,16 +2,21 @@ package com.example.moviesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
 import com.example.moviesapp.Adapter.SliderAdapter;
 import com.example.moviesapp.Domain.SliderItem;
 import com.example.moviesapp.R;
@@ -32,14 +37,15 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void baners()
     {
-        List<SliderItem> SliderItems=new ArrayList<>();
-        SliderItems.add(new SliderItem(R.drawable.wide1));
-        SliderItems.add(new SliderItem(R.drawable.wide));
-        SliderItems.add(new SliderItem(R.drawable.wide3));
-        viewPager2.setAdapter(new SliderAdapter(SliderItems,viewPager2));
+        List<SliderItem> sliderItems=new ArrayList<>();
+        sliderItems.add(new SliderItem(R.drawable.wide));
+        sliderItems.add(new SliderItem(R.drawable.wide1));
+        sliderItems.add(new SliderItem(R.drawable.wide3));
+
+        viewPager2.setAdapter(new SliderAdapter(sliderItems,viewPager2));
         viewPager2.setClipToPadding(false);
         viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(8).setOverScrollMode(RecyclerView.OVER_SCROLL_ALWAYS);
+        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_ALWAYS);
 
         CompositePageTransformer compositePageTransformer=new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(40));
@@ -86,7 +92,4 @@ public class MainActivity2 extends AppCompatActivity {
     {
         viewPager2=findViewById(R.id.ViewPager1);
     }
-
-
-
 }
